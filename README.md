@@ -13,7 +13,6 @@ You may access the deployed version [here](https://usa-covid-testing.netlify.app
 
 ![U.S. Covid Testing Map Nebraska Zoom in]("./assets/images/screenshot2.png")
 
-
 ### Running locally 
 To run locally, clone the repo and run the following in your terminal: 
 ```
