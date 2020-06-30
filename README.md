@@ -9,11 +9,9 @@ You may access the deployed version [here](https://usa-covid-testing.netlify.app
 
 ### Demo
 
-![U.S. Covid Testing Map Screenshot 1]("./screenshot1.png")
+![U.S. Covid Testing Map Screenshot 1](./assets/images/screenshot1.png)
 
-![U.S. Covid Testing Map Screenshot 1]("screenshot1.png")
-
-![U.S. Covid Testing Map Nebraska Zoom in]("/screenshot1.png")
+![U.S. Covid Testing Map Nebraska Zoom in](./assets/images/screenshot2.png)
 
 ### Running locally 
 To run locally, clone the repo and run the following in your terminal: 
