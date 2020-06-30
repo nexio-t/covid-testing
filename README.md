@@ -5,7 +5,7 @@
 ### About 
 This mapping project uses public data from the The Covid Tracking Project's API, a volunteer-driven effort to collect the latest testing figures across all U.S. states and territories, led by The Atlantic. All data is current and comes from the current state data endpoint, which is updated at least once daily between 4PM and 5PM EDT by The Covid Tracking Project team.
 
-You may access the deployed version here. 
+You may access the deployed version [here](https://usa-covid-testing.netlify.app/). 
 
 ### Demo
 
