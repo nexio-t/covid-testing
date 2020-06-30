@@ -1,48 +1,40 @@
-# 🍃 Gatsby Leaflet Starter
+# U.S. Covid Testing Map
 
-Jumpstart your next Gatsby mapping project with Leaflet!
+> A mapping web app to track COVID-19 testing across U.S. states and territories. 
 
-## ⚡ Quick Deploy
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/colbyfayock/gatsby-starter-leaflet) [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/colbyfayock/gatsby-starter-leaflet)
+### About 
+This mapping project uses public data from the The Covid Tracking Project's API, a volunteer-driven effort to collect the latest testing figures across all U.S. states and territories, led by The Atlantic. All data is current and comes from the current state data endpoint, which is updated at least once daily between 4PM and 5PM EDT by The Covid Tracking Project team.
+
+You may access the deployed version here. 
+
+### Demo
+
+![U.S. Covid Testing Map Screenshot 1]("assets/images/screenshot1")
+
+![U.S. Covid Testing Map Nebraska Zoom in]("assets/images/screenshot2")
 
 
-## 🧰 What This Includes
-* [Yarn](https://yarnpkg.com/en/)
-* [Gatsby](https://www.gatsbyjs.org/)
+### Running locally 
+To run locally, clone the repo and run the following in your terminal: 
+```
+npm install 
+```
+and then: 
+```
+npm install 
+```
+
+### Sources and Attribution 
+
+* [The COVID Tracking Project](https://yarnpkg.com/en/)
+* [Google Maps](https://developers.google.com/maps/documentation)
 * [Sass](https://sass-lang.com)
-* [React Helmet](https://github.com/nfl/react-helmet)
-* [Resolve Src](https://github.com/alampros/gatsby-plugin-resolve-src)
+* [Gatsby](https://www.gatsbyjs.org/)
 * [Leaflet](https://leafletjs.com/)
-* [React Leaflet](https://react-leaflet.js.org)
-
-## 🚀 Getting Started
-
-### Requirements
-* [Gatsby CLI](https://www.npmjs.com/package/gatsby-cli)
+* [Gatsby Leaflet Starter](https://github.com/colbyfayock/gatsby-starter-leaflet)
 * [Yarn](https://yarnpkg.com/en/)
+* [Google Fonts](https://fonts.google.com/)
 
-### Quick Start
-Run the following in your favorite terminal:
-```
-gatsby new [directory] https://github.com/colbyfayock/gatsby-starter-leaflet
-```
+### Author
+**Tomas Gear:** [Github](https://github.com/nexio-t) | [Portfolio](http://www.tomas-gear.com)
 
-### Starting from Scratch
-* Set up Yarn: https://yarnpkg.com/lang/en/docs/install/#mac-stable)[https://yarnpkg.com/lang/en/docs/install/
-* Install the Gatsby CLI globally:
-```
-yarn global add gatsby-cli
-```
-* Inside the directory of your choice, scaffold a new Gatsby site:
-```
-gatsby new [directory] https://github.com/colbyfayock/gatsby-starter-leaflet
-```
-For example, if I want my installation in `~/Code/new-gatsby-site`, I would navigate to `~/Code` and run:
-```
-gatsby new new-gatsby-site https://github.com/colbyfayock/gatsby-starter-leaflet
-```
-* Navigate to your new directory and run:
-```
-yarn develop
-```
-* You should now be running a new Gatsby site locally! 🎉
