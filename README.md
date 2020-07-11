@@ -20,7 +20,7 @@ npm install
 ```
 and then: 
 ```
-npm install 
+npm start 
 ```
 
 ### Sources and Attribution 
