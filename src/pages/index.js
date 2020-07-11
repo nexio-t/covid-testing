@@ -96,7 +96,7 @@ const IndexPage = () => {
     });
 
     // Fetch coordinates for each state
-    const statesWithCoordinates = await data.map(async state => {
+    const statesWithCoordinates = data.map(async state => {
       geoCodeResponse = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
       );
@@ -115,16 +115,13 @@ const IndexPage = () => {
       };
     });
 
+    const allStates = await Promise.all(statesWithCoordinates);
+
     let statesArr = [];
 
-    let i = 0;
-
-    while (i < statesWithCoordinates.length) {
-      await statesWithCoordinates[i].then(data => {
-        statesArr.push(data);
-      });
-      i++;
-    }
+    _.map(allStates, stateData => {
+      statesArr.push(stateData);
+    });
 
     const geoJsonLayers = new L.GeoJSON(statesArr, {
       pointToLayer: (feature = {}, latlng) => {
@@ -143,9 +140,9 @@ const IndexPage = () => {
         const percentPositive = ((positive / totalTestResults) * 100).toFixed(
           1
         );
-        
-        let testSummary; 
-        
+
+        let testSummary;
+
         if (totalTestResults > 1000 && totalTestResults < 1000000) {
           testSummary = `${(totalTestResults / 1000).toFixed(1)}K+`;
         } else if (totalTestResults < 1000) {
