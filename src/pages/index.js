@@ -200,9 +200,7 @@ const IndexPage = () => {
 
     const newArr = [];
 
-    const geoJson = {
-      type: 'FeatureCollection',
-      features: await data.map(async (state) => {
+    const geoJson = data.map(async (state) => {
         console.log('each state is: ', state.fullState);
         geoCodeResponse = await axios
           .get(
@@ -239,8 +237,7 @@ const IndexPage = () => {
             coordinates: [state.coordinates.lng, state.coordinates.lat],
           },
         };
-      }),
-    };
+      })
 
    
 
@@ -253,7 +250,7 @@ const IndexPage = () => {
     let i = 0;
 
     while (i < 56) {
-      await geoJson.features[i].then((data) => {
+      await geoJson[i].then((data) => {
         statesArr.push(data);
       });
 
