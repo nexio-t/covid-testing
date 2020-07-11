@@ -244,18 +244,7 @@ const IndexPage = () => {
       }),
     };
 
-    // TO DO
-    // Add and commit this
-    // try using Promise.all (see if that works)
-    // You really really need to learn promises
-    // And then see if you can get the markers to display
-
-    // map over geoJSON, and construct a newObj, then
-
-    // geoJson.then(data => console.log("geoJSON then is: ", data));
-    // geoJson.map(data => {console.log("GeoJSON map is: ", data)})
-
-    // Promise.all(geoJson).then(data => console.log("promise all fulfilled", data));
+   
 
     console.log('geoJson is: ', geoJson);
 
