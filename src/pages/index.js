@@ -204,7 +204,7 @@ const IndexPage = () => {
       type: 'FeatureCollection',
       features: await data.map(async (state) => {
         console.log('each state is: ', state.fullState);
-        geoCodeResponse = axios
+        geoCodeResponse = await axios
           .get(
             `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
           )
@@ -225,9 +225,7 @@ const IndexPage = () => {
             return state;
             // maybe try adding a return here?
           })
-          .then((data) => {
-            console.log('data45 then, ', data.coordinates);
-          });
+      
 
         console.log('state outside the then chain: ', state.coordinates.lat);
 
