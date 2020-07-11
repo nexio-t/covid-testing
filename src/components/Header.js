@@ -3,7 +3,8 @@ import { Link } from 'gatsby';
 
 import Container from 'components/Container';
 
-const Header = () => {
+const Header = ( ) => {
+
   return (
     <header>
       <Container type="content">
