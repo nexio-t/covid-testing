@@ -143,9 +143,9 @@ const IndexPage = () => {
         const percentPositive = ((positive / totalTestResults) * 100).toFixed(
           1
         );
-
-        featuresArr.push(featureItem);
-
+        
+        let testSummary; 
+        
         if (totalTestResults > 1000 && totalTestResults < 1000000) {
           testSummary = `${(totalTestResults / 1000).toFixed(1)}K+`;
         } else if (totalTestResults < 1000) {
