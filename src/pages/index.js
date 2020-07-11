@@ -186,7 +186,7 @@ const IndexPage = () => {
 
       const featuresArr = []; 
 
-
+      
       for (let i =0; i < data.length; i++) {
 
         console.log("data is: ", data[i]); 
