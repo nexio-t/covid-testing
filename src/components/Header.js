@@ -3,7 +3,8 @@ import { Link } from 'gatsby';
 
 import Container from 'components/Container';
 
-const Header = () => {
+const Header = ( ) => {
+
   return (
     <header>
       <Container type="content">
@@ -14,9 +15,6 @@ const Header = () => {
           </li>
           <li>
             <Link to="/page-2/">About</Link>
-          </li>
-          <li>
-            <Link to="/charts/">Charts</Link>
           </li>
         </ul>
       </Container>
