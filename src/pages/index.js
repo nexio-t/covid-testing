@@ -204,7 +204,7 @@ const IndexPage = () => {
       type: 'FeatureCollection',
       features: await data.map(async (state) => {
         console.log('each state is: ', state.fullState);
-        geoCodeResponse = await axios
+        geoCodeResponse = axios
           .get(
             `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
           )
