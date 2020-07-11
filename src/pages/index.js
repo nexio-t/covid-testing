@@ -75,11 +75,12 @@ const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 5;
 
 const IndexPage = () => {
+  let geoCodeResponse;
 
   async function mapEffect({ leafletElement: map } = {}) {
+    let response;
 
-    // Covid Tracking Project API
-    const response = await axios.get(
+    response = await axios.get(
       "https://covidtracking.com/api/v1/states/current.json"
     );
 
@@ -94,103 +95,93 @@ const IndexPage = () => {
       });
     });
 
-    // Add coordinates to states and territories
-    const addCoord = async () => {
+    // Fetch coordinates for each state
+    const statesWithCoordinates = await data.map(async state => {
+      geoCodeResponse = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
+      );
 
-      const featuresArr = [];
+      state.coordinates = geoCodeResponse.data.results[0].geometry.location;
 
-      for (let i = 0; i < data.length; i++) {
-
-        const geoCodeResponse = await axios.get(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${data[i].fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
-        );
-
-        const stateGeoCode = geoCodeResponse.data.results;
-
-        data[i].coordinates = stateGeoCode[0].geometry.location;
-
-        let item = data[i];
-
-        let featureItem = {
-          type: "Feature",
-          properties: {
-            item
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [item.coordinates.lng, item.coordinates.lat]
-          }
-        };
-
-        featuresArr.push(featureItem);
-
-      }
-
-      return featuresArr;
-
-    };
-
-    // Create GeoJSON Layer with Markers 
-    addCoord().then(statesWithCoordinates => {
-
-      const geoJsonLayers = new L.GeoJSON(statesWithCoordinates, {
-
-        pointToLayer: (feature = {}, latlng) => {
-
-          const { properties = {} } = feature;
-
-          const {
-            fullState,
-            totalTestResults,
-            positive,
-            dateChecked
-          } = properties.item;
-
-          const recentTime = moment(dateChecked).utc().format("LLLL");
-          const totalTestFormatted = totalTestResults.toLocaleString("en");
-          const positiveFormatted = positive.toLocaleString("en");
-          const percentPositive = ((positive / totalTestResults) * 100).toFixed(
-            1
-          );
-
-          let testSummary;
-
-          if (totalTestResults > 1000 && totalTestResults < 1000000) {
-            testSummary = `${(totalTestResults / 1000).toFixed(1)}K+`;
-          } else if (totalTestResults < 1000) {
-            testSummary = totalTestResults;
-          } else if (totalTestResults > 1000000) {
-            testSummary = `${(totalTestResults / 1000000).toFixed(2)}M+`;
-          }
-
-          const html = `
-            <span class="icon-marker">
-              <span class="icon-marker-tooltip">
-                <h2>${fullState}</h2>
-                <p class="last-updated"><strong>Last Updated:</strong> ${recentTime}</p>
-                <ul>
-                  <li>Total Tests: ${totalTestFormatted}</li>
-                  <li>Positive Tests: ${positiveFormatted}</li>
-                  <hr>
-                  <li class="positive">Positive (%): ${percentPositive}</li>
-                </ul>
-              </span>
-              ${testSummary}
-            </span>
-          `;
-
-          return L.marker(latlng, {
-            icon: L.divIcon({
-              className: "icon",
-              html,
-              iconSize: [30, 42]
-            }),
-            riseOnHover: true
-          });
+      return {
+        type: "Feature",
+        properties: {
+          ...state
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [state.coordinates.lng, state.coordinates.lat]
         }
-      });
-      geoJsonLayers.addTo(map);
+      };
     });
+
+    let statesArr = [];
+
+    let i = 0;
+
+    while (i < statesWithCoordinates.length) {
+      await statesWithCoordinates[i].then(data => {
+        statesArr.push(data);
+      });
+      i++;
+    }
+
+    const geoJsonLayers = new L.GeoJSON(statesArr, {
+      pointToLayer: (feature = {}, latlng) => {
+        const { properties = {} } = feature;
+
+        const {
+          fullState,
+          totalTestResults,
+          positive,
+          dateChecked
+        } = properties;
+
+        const recentTime = moment(dateChecked).utc().format("LLLL");
+        const totalTestFormatted = totalTestResults.toLocaleString("en");
+        const positiveFormatted = positive.toLocaleString("en");
+        const percentPositive = ((positive / totalTestResults) * 100).toFixed(
+          1
+        );
+        
+        let testSummary; 
+        
+        if (totalTestResults > 1000 && totalTestResults < 1000000) {
+          testSummary = `${(totalTestResults / 1000).toFixed(1)}K+`;
+        } else if (totalTestResults < 1000) {
+          testSummary = totalTestResults;
+        } else if (totalTestResults > 1000000) {
+          testSummary = `${(totalTestResults / 1000000).toFixed(2)}M+`;
+        }
+
+        const html = `
+          <span class="icon-marker">
+            <span class="icon-marker-tooltip">
+              <h2>${fullState}</h2>
+              <p class="last-updated"><strong>Last Updated:</strong> ${recentTime}</p>
+              <ul>
+                <li>Total Tests: ${totalTestFormatted}</li>
+                <li>Positive Tests: ${positiveFormatted}</li>
+                <hr>
+                <li class="positive">Positive (%): ${percentPositive}</li>
+              </ul>
+            </span>
+            ${testSummary}
+          </span>
+        `;
+
+        return L.marker(latlng, {
+          icon: L.divIcon({
+            className: "icon",
+            html,
+            iconSize: [30, 42]
+          }),
+          riseOnHover: true
+        });
+      }
+    });
+
+    geoJsonLayers.addTo(map);
   }
 
   const mapSettings = {
