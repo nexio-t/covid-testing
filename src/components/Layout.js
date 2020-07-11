@@ -8,6 +8,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 const Layout = ({ children, pageName }) => {
+
   let className = '';
 
   if ( pageName ) {
@@ -17,7 +18,7 @@ const Layout = ({ children, pageName }) => {
   return (
     <>
       <Helmet bodyAttributes={{ class: className }}>
-        <title>Gatsby Site</title>
+        <title>U.S. Covid Testing</title>
       </Helmet>
       <div className="wrapper">
         <Header />

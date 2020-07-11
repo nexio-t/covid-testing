@@ -86,7 +86,7 @@ const IndexPage = () => {
 
     const { data } = response;
 
-    // Add full state name to each state
+    // Add full state name property to pass through to Google Maps API
     _.map(data, stateData => {
       _.map(fullStateNames, state => {
         if (stateData.state === state.name) {
@@ -144,7 +144,7 @@ const IndexPage = () => {
           1
         );
 
-        let testSummary;
+        featuresArr.push(featureItem);
 
         if (totalTestResults > 1000 && totalTestResults < 1000000) {
           testSummary = `${(totalTestResults / 1000).toFixed(1)}K+`;
