@@ -81,10 +81,14 @@ const IndexPage = () => {
     let response;
 
     response = await axios.get(
-      "https://covidtracking.com/api/v1/states/current.json"
+      "https://api.covidtracking.com/v1/states/current.json"
     );
 
+    console.log('response is: ', response); 
+
     const { data } = response;
+
+    console.log("data is: ", data); 
 
     // Add full state name property to pass through to Google Maps API
     _.map(data, stateData => {
@@ -116,6 +120,8 @@ const IndexPage = () => {
     });
 
     const allStates = await Promise.all(statesWithCoordinates);
+
+    console.log('allstates is: ')
 
     let statesArr = [];
 
