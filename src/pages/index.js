@@ -121,8 +121,6 @@ const IndexPage = () => {
 
     const allStates = await Promise.all(statesWithCoordinates);
 
-    console.log('allstates is: ')
-
     let statesArr = [];
 
     _.map(allStates, stateData => {
