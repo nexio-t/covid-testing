@@ -1,0 +1,48 @@
+// .chart-container {
+//     display: flex;
+//     flex-wrap: nowrap;
+//     flex-direction: row;
+//     width: 100%;
+//     margin: 0 auto;
+//   }
+
+.random-class {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  margin: 40px 15px 15px 40px;
+}
+
+.chart-one {
+ grid-column-start: 0;
+ grid-column-end: 1;
+}
+
+.chart-one {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.chart-three {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+
+  // .chart-container > div {
+  //   // background-color: #f1f1f1;
+  //   width: 100px;
+  //   margin: 10px;
+  //   text-align: center;
+  //   line-height: 75px;
+  //   // font-size: 30px;
+  // }
+
+//   .test {
+//   width: 10em;
+// }
+  
+// .chart-container-content {
+//   max-width: 50em;
+//   padding: 0 1em;
+// }
