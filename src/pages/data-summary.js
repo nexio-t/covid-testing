@@ -1,25 +1,56 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout';
 import Container from 'components/Container';
+// var dayjs = require('dayjs')
+import dayjs from 'dayjs'
 import ChartContainer from 'components/ChartContainer'; 
 // import 'assets/stylesheets/components/_chartcontainer.scss';
+import _ from "lodash";
 
 import BarChartRace from "../components/BarChartRace";
 import BarChart from "../components/BarChart";
 import axios from "axios";
 
+
+
+const formatData = (data) => {
+  console.log("formatData fn data is: ", data); 
+  console.log("formatData.length is: ", data.length); 
+
+  if (data.length !== 6 || data.length === 0 || data.length === undefined) return; 
+
+  // loop over that data here please and then commit \
+
+  return _.map(data, async (day) => {
+
+    const {deathIncrease, positiveIncrease, hospitalizedIncrease, dateChecked } = day; 
+
+    const abridgedDate = dayjs(`${dateChecked}`).format('MMM D'); 
+    console.log("abridgeDate is: ", abridgedDate); 
+
+    return {
+      deathIncrease,
+      positiveIncrease, 
+      hospitalizedIncrease, 
+      abridgedDate
+    }
+
+  })
+
+}
+
 // Custom Hook To Fetch U.S. Daily Totals
 const useFetchUSDailyTotals = () => {
 
-  const [usaCurrentData, setUsaCurrentData] = useState({ dailyTotals: [] });
-  const [stateHistoricalData, setStateHistoricalData] = useState({stateDailyTotals: []});
-  const [stateCurrentData, setStateCurrentData] = useState({stateDailyTotals: []});
-  const [usaHistoricData, setUsaHistoricData] = useState({ dailyTotals: [] });
+  // const [usaCurrentData, setUsaCurrentData] = useState({ dailyTotals: [] });
+  // const [stateHistoricalData, setStateHistoricalData] = useState({stateDailyTotals: []});
+  // const [stateCurrentData, setStateCurrentData] = useState({stateDailyTotals: []});
+  const [usaHistoricData, setUsaHistoricData] = useState([]);
 
   const [usaHistoricUrl, setUsaHistoricUrl] = useState('https://api.covidtracking.com/v1/us/daily.json');
-  const [stateHistoricUrl, setStateHistoricUrl] = useState('https://api.covidtracking.com/v1/states/daily.json'); 
-  const [stateCurrentUrl, setStateCurrentUrl] = useState('https://api.covidtracking.com/v1/states/current.json'); 
-  const [sort, setSort] = useState(''); 
+  // const [stateHistoricUrl, setStateHistoricUrl] = useState('https://api.covidtracking.com/v1/states/daily.json'); 
+  // const [stateCurrentUrl, setStateCurrentUrl] = useState('https://api.covidtracking.com/v1/states/current.json'); 
 
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -31,16 +62,27 @@ const useFetchUSDailyTotals = () => {
         setIsError(false);
         setIsLoading(true);
         const usaHistoricValues= await axios(usaHistoricUrl);
-        const stateHistoricValues = await axios(stateHistoricUrl); 
-        const stateCurrentValues = await axios(stateCurrentUrl)
-        console.log("usaHistoricResult result is: ", usaHistoricValues); 
-        console.log("stateHistoricResult is: ", stateHistoricValues);
-        console.log("stateCurrentValues is :", stateCurrentValues);  
-        setSort("ascending");
+        console.log("usaHistoricValues is: ", usaHistoricValues); 
 
-        setUsaHistoricData(usaHistoricValues.data);
-        setStateHistoricalData(stateHistoricValues.data); 
-        setStateCurrentData(stateCurrentValues.data)
+        const pastSevenDays = usaHistoricValues.data.slice(0,6);
+        console.log("pastSevenDays is: ", pastSevenDays);  
+        // const stateHistoricValues = await axios(stateHistoricUrl); 
+        // const stateCurrentValues = await axios(stateCurrentUrl)
+        // console.log("usaHistoricResult result is: ", usaHistoricValues); 
+        // console.log("stateHistoricResult is: ", stateHistoricValues);
+        // console.log("stateCurrentValues is :", stateCurrentValues);  
+
+        const formattedData = formatData(pastSevenDays)
+        console.log("formattedData is: ", formattedData); 
+
+        console.log("usaHistoricValues is: ", usaHistoricValues); 
+        console.log("usaHistoricValues typeof data is: ", typeof usaHistoricValues.data)
+        console.log("usaHistoricValues.data[0] is", usaHistoricValues.data.slice(0,6));
+        console.log("usaHistoricValues.data.length is: ", usaHistoricValues.data.length); 
+
+        setUsaHistoricData(usaHistoricValues);
+        // setStateHistoricalData(stateHistoricValues.data); 
+        // setStateCurrentData(stateCurrentValues.data)
 
         setIsLoading(false);
       } catch (error) {
@@ -51,7 +93,7 @@ const useFetchUSDailyTotals = () => {
     fetchData();
   }, [usaHistoricUrl]);
  
-  return [{ usaCurrentData, stateHistoricalData, stateCurrentData, usaHistoricData, isLoading, isError, sort }];
+  return [{  usaHistoricData, isLoading, isError }];
 }
 
 function Charts () {
@@ -59,12 +101,15 @@ function Charts () {
     // Set a hook here that fetches USDailyTotals
     // Set another hook here that fetches some other data 
     // https://www.robinwieruch.de/react-hooks-fetch-data
-
     // https://github.com/muratkemaldar/using-react-hooks-with-d3/tree/09-racing-bar-chart/src
 
-  const [{ usaCurrentData, stateHistoricalData, stateCurrentData, usaHistoricData, isLoading, isError, sort }] = useFetchUSDailyTotals(); 
+  const [{ usaHistoricData, isLoading, isError }] = useFetchUSDailyTotals(); 
 
   console.log("usaHistoricData is: ", usaHistoricData)
+  console.log("typeof usaHistoricData is: ", typeof usaHistoricData.data); 
+
+  
+  // console.log("usaHistoricData[0] is: ", usaHistoricData); 
 
   // Chart options
     // https://frappe.io/charts/docs/basic/basic_chart
@@ -81,7 +126,7 @@ function Charts () {
 
     <div>
       {console.log("isLoading is: ", isLoading)}
-      {isLoading ?  <Layout>
+      {!isLoading ?  <Layout>
         <h1 className="text-center"> Data Summary </h1>
         <ChartContainer className="random-class">
 
@@ -117,3 +162,4 @@ function Charts () {
 };
 
 export default Charts;
+/* eslint-disable */
