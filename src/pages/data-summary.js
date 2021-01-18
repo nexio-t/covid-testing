@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import ChartContainer from 'components/ChartContainer'; 
 // import 'assets/stylesheets/components/_chartcontainer.scss';
 import _ from "lodash";
-
+import DataCard from '../components/DataCard'; 
 import BarChartRace from "../components/BarChartRace";
 import BarChart from "../components/BarChart";
 import axios from "axios";
@@ -22,7 +22,7 @@ const formatData = (data) => {
 
   // loop over that data here please and then commit \
 
-  return _.map(data, async (day) => {
+  return _.map(data, day => {
 
     const {deathIncrease, positiveIncrease, hospitalizedIncrease, dateChecked } = day; 
 
@@ -47,6 +47,7 @@ const useFetchUSDailyTotals = () => {
   // const [stateHistoricalData, setStateHistoricalData] = useState({stateDailyTotals: []});
   // const [stateCurrentData, setStateCurrentData] = useState({stateDailyTotals: []});
   const [usaHistoricData, setUsaHistoricData] = useState([]);
+
 
   const [usaHistoricUrl, setUsaHistoricUrl] = useState('https://api.covidtracking.com/v1/us/daily.json');
   // const [stateHistoricUrl, setStateHistoricUrl] = useState('https://api.covidtracking.com/v1/states/daily.json'); 
@@ -80,7 +81,7 @@ const useFetchUSDailyTotals = () => {
         console.log("usaHistoricValues.data[0] is", usaHistoricValues.data.slice(0,6));
         console.log("usaHistoricValues.data.length is: ", usaHistoricValues.data.length); 
 
-        setUsaHistoricData(usaHistoricValues);
+        setUsaHistoricData(formattedData);
         // setStateHistoricalData(stateHistoricValues.data); 
         // setStateCurrentData(stateCurrentValues.data)
 
@@ -105,10 +106,51 @@ function Charts () {
 
   const [{ usaHistoricData, isLoading, isError }] = useFetchUSDailyTotals(); 
 
-  console.log("usaHistoricData is: ", usaHistoricData)
-  console.log("typeof usaHistoricData is: ", typeof usaHistoricData.data); 
+  const positiveTestChange = [{ values: usaHistoricData.map(({ positiveIncrease}) => positiveIncrease)}]; 
+  const deathsChange = [{ values: usaHistoricData.map(({ deathIncrease }) => deathIncrease)}];
+  const hospitalizedChange = [{ values: usaHistoricData.map(({ hospitalizedIncrease}) => hospitalizedIncrease)}];
+  const dates = usaHistoricData.map(({ abridgedDate}) => abridgedDate);
+
+  console.log("positiveTestChange is: ", positiveTestChange); 
+
+
+  const testData = {
+    labels: dates,
+    datasets: positiveTestChange
+  }
+
+  const deathData = {
+    labels: dates,
+    datasets: deathsChange
+  }
+
+  const hospitalizedData = {
+    labels: dates,
+    datasets: hospitalizedChange
+  }
+
+  const totalCasesData = {
+    random: "random"
+  }
+
+  const totalHospData = {
+    random: "random"
+  }
+
+  const totalDeathData = {
+    random: "random"
+  }
+
+
+
 
   
+  console.log("testData is: ", testData); 
+  console.log("deathData is: ", deathData); 
+  console.log("hospitalizedData is: ", hospitalizedData); 
+  // const newCase = usaHistoricData.filter(data => return )
+  // const newHospitalizations = 
+  // const newDeaths = 
   // console.log("usaHistoricData[0] is: ", usaHistoricData); 
 
   // Chart options
@@ -130,22 +172,37 @@ function Charts () {
         <h1 className="text-center"> Data Summary </h1>
         <ChartContainer className="random-class">
 
+          <div>
+            <h2> Total Cases </h2>
+            <DataCard data={totalCasesData}/>
+          </div>
+
+          <div>
+            <h2> Total Hospitalizations </h2>
+            <DataCard data={totalHospData}/>
+          </div>
+
+          <div>
+            <h2> Total Deaths </h2>
+            <DataCard data={totalDeathData}/>
+          </div>
+
           <div className="chart-one text-center">
             <h2>Daily New Cases </h2>
-            <h5>New cases cases</h5>
-            <BarChart data={usaHistoricData}/>
+            <h5>New cases per day</h5>
+            <BarChart data={testData}/>
           </div>
 
           <div className="chart-two text-center">
             <h2>Daily New Hospitalizations</h2>
             <h5>New hospitalizations per day</h5>
-            <BarChart data={usaHistoricData}/>
+            <BarChart data={deathData}/>
           </div>
 
           <div className="chart-three text-center">
             <h2>Daily New Deaths</h2>
             <h5>Deaths per Day</h5>
-            <BarChart data={usaHistoricData}/>
+            <BarChart data={hospitalizedData}/>
           </div>
           
         </ChartContainer>
