@@ -1,12 +1,4 @@
-// .chart-container {
-//     display: flex;
-//     flex-wrap: nowrap;
-//     flex-direction: row;
-//     width: 100%;
-//     margin: 0 auto;
-//   }
-
-.random-class {
+.data-chart-container {
   display: grid; 
   grid-template-areas: 
     'dataOne dataTwo dataThree'
@@ -86,7 +78,7 @@ min-height: 180px;
 
 @media only screen and (max-width: 768px) {
 
-  .random-class {
+  .data-chart-container {
     display: grid; 
     grid-template-areas: 
       'dataOne'
