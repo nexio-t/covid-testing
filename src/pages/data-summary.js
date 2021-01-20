@@ -74,13 +74,9 @@ const useFetchUSDailyTotals = () => {
 
         const formattedData = formatData(pastSevenDays)
         console.log("formattedData is: ", formattedData); 
-
-        console.log("usaHistoricValues is: ", usaHistoricValues); 
-        console.log("usaHistoricValues typeof data is: ", typeof usaHistoricValues.data)
-        console.log("usaHistoricValues.data[0] is", usaHistoricValues.data.slice(0,6));
-        console.log("usaHistoricValues.data.length is: ", usaHistoricValues.data.length); 
-
-        setUsaHistoricData(formattedData);
+        // const a = formattedData.reverse()
+        // console.log("a is:", a) 
+        setUsaHistoricData(formattedData.reverse());
         setUsaCurrentData(pastDay[0]); 
         // setStateHistoricalData(stateHistoricValues.data); 
         // setStateCurrentData(stateCurrentValues.data)
