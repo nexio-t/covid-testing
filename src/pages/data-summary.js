@@ -11,7 +11,7 @@ import DataCard from '../components/DataCard';
 import BarChartRace from "../components/BarChartRace";
 import BarChart from "../components/BarChart";
 import axios from "axios";
-// import ClipLoader from "react-spinners/ClipLoader";
+// s
 
 // import Container from 'components/Container';
 
@@ -172,7 +172,7 @@ function Charts () {
       {console.log("isLoading is: ", isLoading)}
       {!isLoading ?  
       <Layout>
-      <Container type="content">
+      {/* <Container type="content"> */}
       
         <h1 className="data-summary text-center"> U.S. Summary </h1>
         <ChartContainer className="random-class">
@@ -205,14 +205,10 @@ function Charts () {
           </div>
           
         </ChartContainer>
-        {/* <Container type="content" className="text-center">
-          
-          <BarChartRace/>  
-        
-        </Container> */}
-        </Container>
+      
+        {/* </Container> */}
       </Layout>  
-      : <h1>loading</h1>}
+      : <h1 className="text-center">Loading...</h1>}
     {/* {usaHistoricData &&} */}
     </div>
     

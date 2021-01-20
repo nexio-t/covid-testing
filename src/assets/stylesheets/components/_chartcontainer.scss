@@ -30,8 +30,7 @@
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
-  margin-bottom: 20px 0px 20px 0px; 
-}
+  margin: 10px 0px 40px 0px;}
 
 .chart-two {
   grid-area: chartTwo; 
@@ -41,7 +40,7 @@ min-height: 180px;
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
-  margin-bottom: 10px 0px 10px 0px;
+  margin: 10px 0px 40px 0px;
 }
 
 .chart-three {
@@ -52,7 +51,7 @@ min-height: 180px;
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
-  margin-bottom: 10px 0px 10px 0px;
+  margin: 10px 0px 40px 0px;
 }
 
 .graph-title {
@@ -98,4 +97,23 @@ min-height: 180px;
   font-size: 1.8rem;
   font-family: 'Saira', sans-serif;
   color: #444444; 
+}
+
+// stack things 
+@media only screen and (max-width: 768px) {
+
+  .random-class {
+    display: grid; 
+    grid-template-areas: 
+      'dataOne'
+      'dataTwo'
+      'dataThree'
+      'chartOne'
+      'chartTwo'
+      'chartThree';
+    // grid-template-columns: 1fr 1fr 1fr;
+    // grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    // margin: 40px 15px 15px 40px;
+  }
 }

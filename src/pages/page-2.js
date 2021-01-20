@@ -11,7 +11,7 @@ const SecondPage = () => {
         <title>About</title>
       </Helmet>
       <Container type="content" className="text-center">
-        <div>
+        <div className="about-container">
         <h1 className="about-project">About this project</h1>
         <p className="paragraph-text">This mapping project uses public data from the <a href="https://covidtracking.com/">The Covid Tracking Project's API</a>, a volunteer-driven effort to collect the latest testing figures across all U.S. states and territories, led by <a href="https://www.theatlantic.com/"> The Atlantic.</a></p>
 

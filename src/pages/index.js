@@ -84,11 +84,7 @@ const IndexPage = () => {
       "https://api.covidtracking.com/v1/states/current.json"
     );
 
-    console.log('response is: ', response); 
-
     const { data } = response;
-
-    console.log("data is: ", data); 
 
     // Add full state name property to pass through to Google Maps API
     _.map(data, stateData => {
@@ -105,7 +101,9 @@ const IndexPage = () => {
         `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
       );
 
-      state.coordinates = geoCodeResponse.data.results[0].geometry.location;
+      if (geoCodeResponse === undefined) return; 
+
+      state.coordinates = await geoCodeResponse.data.results[0].geometry.location;
 
       return {
         type: "Feature",
