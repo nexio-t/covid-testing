@@ -11,6 +11,8 @@ import DataCard from '../components/DataCard';
 import BarChartRace from "../components/BarChartRace";
 import BarChart from "../components/BarChart";
 import axios from "axios";
+// import Container from 'components/Container';
+
 
 
 
@@ -47,6 +49,7 @@ const useFetchUSDailyTotals = () => {
   // const [stateHistoricalData, setStateHistoricalData] = useState({stateDailyTotals: []});
   // const [stateCurrentData, setStateCurrentData] = useState({stateDailyTotals: []});
   const [usaHistoricData, setUsaHistoricData] = useState([]);
+  const [usaCurrentData, setUsaCurrentData] = useState([]);
 
 
   const [usaHistoricUrl, setUsaHistoricUrl] = useState('https://api.covidtracking.com/v1/us/daily.json');
@@ -66,12 +69,8 @@ const useFetchUSDailyTotals = () => {
         console.log("usaHistoricValues is: ", usaHistoricValues); 
 
         const pastSevenDays = usaHistoricValues.data.slice(0,6);
-        console.log("pastSevenDays is: ", pastSevenDays);  
-        // const stateHistoricValues = await axios(stateHistoricUrl); 
-        // const stateCurrentValues = await axios(stateCurrentUrl)
-        // console.log("usaHistoricResult result is: ", usaHistoricValues); 
-        // console.log("stateHistoricResult is: ", stateHistoricValues);
-        // console.log("stateCurrentValues is :", stateCurrentValues);  
+        const pastDay = usaHistoricValues.data.slice(0,1);
+        console.log("pastDay is: ", pastDay[0]); 
 
         const formattedData = formatData(pastSevenDays)
         console.log("formattedData is: ", formattedData); 
@@ -82,6 +81,7 @@ const useFetchUSDailyTotals = () => {
         console.log("usaHistoricValues.data.length is: ", usaHistoricValues.data.length); 
 
         setUsaHistoricData(formattedData);
+        setUsaCurrentData(pastDay[0]); 
         // setStateHistoricalData(stateHistoricValues.data); 
         // setStateCurrentData(stateCurrentValues.data)
 
@@ -94,7 +94,7 @@ const useFetchUSDailyTotals = () => {
     fetchData();
   }, [usaHistoricUrl]);
  
-  return [{  usaHistoricData, isLoading, isError }];
+  return [{  usaHistoricData, usaCurrentData, isLoading, isError }];
 }
 
 function Charts () {
@@ -104,14 +104,20 @@ function Charts () {
     // https://www.robinwieruch.de/react-hooks-fetch-data
     // https://github.com/muratkemaldar/using-react-hooks-with-d3/tree/09-racing-bar-chart/src
 
-  const [{ usaHistoricData, isLoading, isError }] = useFetchUSDailyTotals(); 
+  const [{ usaHistoricData, usaCurrentData, isLoading, isError }] = useFetchUSDailyTotals(); 
 
   const positiveTestChange = [{ values: usaHistoricData.map(({ positiveIncrease}) => positiveIncrease)}]; 
   const deathsChange = [{ values: usaHistoricData.map(({ deathIncrease }) => deathIncrease)}];
   const hospitalizedChange = [{ values: usaHistoricData.map(({ hospitalizedIncrease}) => hospitalizedIncrease)}];
   const dates = usaHistoricData.map(({ abridgedDate}) => abridgedDate);
 
+  const { death, hospitalizedCumulative, positive } = usaCurrentData; 
+
+
+
   console.log("positiveTestChange is: ", positiveTestChange); 
+
+  console.log("usaCurrentData is: ", usaCurrentData); 
 
 
   const testData = {
@@ -130,24 +136,22 @@ function Charts () {
   }
 
   const totalCasesData = {
-    random: "random"
+    title: "Total Cases", 
+    total: positive
   }
 
   const totalHospData = {
-    random: "random"
+    title: "Total Hospitalizations", 
+    total: hospitalizedCumulative
   }
 
   const totalDeathData = {
-    random: "random"
+    title: "Total Deaths", 
+    total: death
   }
 
+  console.log("totalCasesData is: ", totalCasesData); 
 
-
-
-  
-  console.log("testData is: ", testData); 
-  console.log("deathData is: ", deathData); 
-  console.log("hospitalizedData is: ", hospitalizedData); 
   // const newCase = usaHistoricData.filter(data => return )
   // const newHospitalizations = 
   // const newDeaths = 
@@ -168,40 +172,37 @@ function Charts () {
 
     <div>
       {console.log("isLoading is: ", isLoading)}
-      {!isLoading ?  <Layout>
+      {!isLoading ?  
+      <Layout>
+      <Container type="content">
+      
         <h1 className="text-center"> Data Summary </h1>
         <ChartContainer className="random-class">
 
           <div>
-            <h2> Total Cases </h2>
-            <DataCard data={totalCasesData}/>
+            <DataCard className="data-one text-center" data={totalCasesData}/>
           </div>
 
           <div>
-            <h2> Total Hospitalizations </h2>
-            <DataCard data={totalHospData}/>
+            <DataCard className="data-two text-center" data={totalHospData}/>
           </div>
 
           <div>
-            <h2> Total Deaths </h2>
-            <DataCard data={totalDeathData}/>
+            <DataCard className="data-three text-center" data={totalDeathData}/>
           </div>
 
           <div className="chart-one text-center">
-            <h2>Daily New Cases </h2>
-            <h5>New cases per day</h5>
+            <h2>Daily New Cases</h2>
             <BarChart data={testData}/>
           </div>
 
           <div className="chart-two text-center">
             <h2>Daily New Hospitalizations</h2>
-            <h5>New hospitalizations per day</h5>
             <BarChart data={deathData}/>
           </div>
 
           <div className="chart-three text-center">
             <h2>Daily New Deaths</h2>
-            <h5>Deaths per Day</h5>
             <BarChart data={hospitalizedData}/>
           </div>
           
@@ -211,7 +212,9 @@ function Charts () {
           <BarChartRace/>  
         
         </Container> */}
-      </Layout> : <h1>loading</h1>}
+        </Container>
+      </Layout>  
+      : <h1>loading</h1>}
     {/* {usaHistoricData &&} */}
     </div>
     

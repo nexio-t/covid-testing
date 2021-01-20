@@ -1,11 +1,16 @@
 import React from 'react';
 
-function DataCard({ data }) {
+function DataCard({data}) {
 
-    console.log("data is: ", data); 
+    const { title , total } = data; 
+
+    const formmatedNum = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     return (
-        <div>DataCard</div>
+        <div className="data-card">
+            <h2 className="data-title">{title}</h2>
+            <div className="data-num">{formmatedNum}</div>
+        </div>
     )
 
 }

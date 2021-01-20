@@ -8,48 +8,72 @@
 
 .random-class {
   display: grid; 
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: 
+    'dataOne dataTwo dataThree'
+    'chartOne chartTwo chartThree';
+  // grid-template-columns: 1fr 1fr 1fr;
+  // grid-template-rows: 1fr 1fr;
   justify-content: center;
-  margin: 40px 15px 15px 40px;
+  // margin: 40px 15px 15px 40px;
 }
 
 .chart-one {
- grid-column-start: 1;
- grid-column-end: 2;
- grid-row-start: 2;
- grid-row-start: 3;
+ grid-area: chartOne; 
+//  grid-column-start: 1;
+//  grid-column-end: 2;
+//  grid-row-start: 1;
+//  grid-row-start: 2;
+min-height: 180px;
+  min-width: 320px;
 }
 
 .chart-two {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
- grid-row-start: 3;
+  grid-area: chartTwo; 
+//   grid-column-start: 2;
+//   grid-column-end: 3;
+//   grid-row-start: 1;
+//  grid-row-start: 2;
+min-height: 180px;
+  min-width: 320px;
 }
 
 .chart-three {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 2;
- grid-row-start: 3;
+  grid-area: chartThree; 
+//   grid-column-start: 3;
+//   grid-column-end: 4;
+//   grid-row-start: 1;
+//  grid-row-start: 2;
+min-height: 180px;
+  min-width: 320px;
 }
 
+.data-one {
+  grid-area: dataOne; 
+}
 
-  // .chart-container > div {
-  //   // background-color: #f1f1f1;
-  //   width: 100px;
-  //   margin: 10px;
-  //   text-align: center;
-  //   line-height: 75px;
-  //   // font-size: 30px;
-  // }
+.data-two {
+  grid-area: dataTwo; 
+}
 
-//   .test {
-//   width: 10em;
-// }
-  
-// .chart-container-content {
-//   max-width: 50em;
-//   padding: 0 1em;
-// }
+.data-three {
+  grid-area: dataThree; 
+}
+
+.data-card {
+  text-align: center;
+  border: 1px solid #D3D3D3; 
+  border-radius: 20px;
+  margin: 15px 15px 45px 15px;
+  box-shadow: 2px 3px #D3D3D3;
+  min-height: 180px;
+  min-width: 320px;
+}
+
+.data-num {
+  font-size: 2.8rem; 
+  text-align: center; 
+}
+
+.data-title {
+  font-size: 1.6rem;
+}
