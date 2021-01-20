@@ -17,6 +17,11 @@
   // margin: 40px 15px 15px 40px;
 }
 
+.data-summary {
+  font-size: 2.2rem;
+  font-family: 'Saira Condensed', sans-serif;
+}
+
 .chart-one {
  grid-area: chartOne; 
 //  grid-column-start: 1;
@@ -25,6 +30,7 @@
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
+  margin-bottom: 20px 0px 20px 0px; 
 }
 
 .chart-two {
@@ -35,6 +41,7 @@ min-height: 180px;
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
+  margin-bottom: 10px 0px 10px 0px;
 }
 
 .chart-three {
@@ -45,6 +52,14 @@ min-height: 180px;
 //  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
+  margin-bottom: 10px 0px 10px 0px;
+}
+
+.graph-title {
+  font-size: 1.6rem;
+  font-family: 'Saira', sans-serif;
+  color: #444444; 
+
 }
 
 .data-one {
@@ -70,10 +85,17 @@ min-height: 180px;
 }
 
 .data-num {
-  font-size: 2.8rem; 
+  font-size: 3rem; 
   text-align: center; 
+  font-family: 'Saira Condensed', sans-serif;
+  margin: 0px 0px 20px 0px;
+  color: rgb(105, 18, 21)
 }
 
 .data-title {
-  font-size: 1.6rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-family: 'Saira', sans-serif;
+  color: #444444; 
 }

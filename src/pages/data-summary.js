@@ -176,7 +176,7 @@ function Charts () {
       <Layout>
       <Container type="content">
       
-        <h1 className="text-center"> Data Summary </h1>
+        <h1 className="data-summary text-center"> U.S. Summary </h1>
         <ChartContainer className="random-class">
 
           <div>
@@ -192,17 +192,17 @@ function Charts () {
           </div>
 
           <div className="chart-one text-center">
-            <h2>Daily New Cases</h2>
+            <h2 className="graph-title">Daily New Cases</h2>
             <BarChart data={testData}/>
           </div>
 
           <div className="chart-two text-center">
-            <h2>Daily New Hospitalizations</h2>
+            <h2 className="graph-title">Daily New Hospitalizations</h2>
             <BarChart data={deathData}/>
           </div>
 
           <div className="chart-three text-center">
-            <h2>Daily New Deaths</h2>
+            <h2 className="graph-title">Daily New Deaths</h2>
             <BarChart data={hospitalizedData}/>
           </div>
           
