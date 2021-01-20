@@ -11,6 +11,8 @@ import DataCard from '../components/DataCard';
 import BarChartRace from "../components/BarChartRace";
 import BarChart from "../components/BarChart";
 import axios from "axios";
+// import ClipLoader from "react-spinners/ClipLoader";
+
 // import Container from 'components/Container';
 
 
