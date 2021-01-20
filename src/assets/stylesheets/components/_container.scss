@@ -7,3 +7,12 @@
   max-width: 50em;
   padding: 0 1em;
 }
+
+@media only screen and (max-width: 768px) {
+  .site-title {
+    font-size: 1.4rem; 
+  }
+  .site-nav {
+    font-size: 1.2rem; 
+  }
+}

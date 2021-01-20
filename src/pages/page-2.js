@@ -17,7 +17,7 @@ const SecondPage = () => {
 
         <p className="paragraph-text"><strong>Why did I create this map?</strong> Like many others, I am closely following COVID-19 data in the United States, and I wanted a way to map the country's testing data and chart summary figures.</p>
 
-        <p className="paragraph-text">This map integrates uses three endpoints from two APIs. The first Historic U.S. Values API from The Covid Tracking Project, which is used to populate the Charts page. The second endpoint is the Current Values for All States, also from The Covid Tracking Project, which displays testing data across the U.S. Map. Finally, the second API is from Google Maps, which fetches coordinates data to map testing figures. 
+        <p className="paragraph-text">This map integrates three endpoints from two APIs. The first is the Historic U.S. Values API from The Covid Tracking Project, which is used to populate the Charts page. The second endpoint is the Current Values for All States, also from The Covid Tracking Project, which contains testing data for all U.S. states. Finally, the second API is from Google Maps, which fetches coordinates data to map testing figures. 
         </p>
 
         <p className="paragraph-text">Endpoints from The Covid Tracking Project are updated at least once daily, Monday through Friday, between 4PM and 5PM EDT by The Covid Tracking Project team.</p>

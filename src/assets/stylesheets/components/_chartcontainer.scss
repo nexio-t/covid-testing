@@ -11,10 +11,7 @@
   grid-template-areas: 
     'dataOne dataTwo dataThree'
     'chartOne chartTwo chartThree';
-  // grid-template-columns: 1fr 1fr 1fr;
-  // grid-template-rows: 1fr 1fr;
   justify-content: center;
-  // margin: 40px 15px 15px 40px;
 }
 
 .data-summary {
@@ -24,20 +21,12 @@
 
 .chart-one {
  grid-area: chartOne; 
-//  grid-column-start: 1;
-//  grid-column-end: 2;
-//  grid-row-start: 1;
-//  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
   margin: 10px 0px 40px 0px;}
 
 .chart-two {
   grid-area: chartTwo; 
-//   grid-column-start: 2;
-//   grid-column-end: 3;
-//   grid-row-start: 1;
-//  grid-row-start: 2;
 min-height: 180px;
   min-width: 320px;
   margin: 10px 0px 40px 0px;
@@ -45,11 +34,7 @@ min-height: 180px;
 
 .chart-three {
   grid-area: chartThree; 
-//   grid-column-start: 3;
-//   grid-column-end: 4;
-//   grid-row-start: 1;
-//  grid-row-start: 2;
-min-height: 180px;
+  min-height: 180px;
   min-width: 320px;
   margin: 10px 0px 40px 0px;
 }
@@ -99,7 +84,6 @@ min-height: 180px;
   color: #444444; 
 }
 
-// stack things 
 @media only screen and (max-width: 768px) {
 
   .random-class {
@@ -111,9 +95,6 @@ min-height: 180px;
       'chartOne'
       'chartTwo'
       'chartThree';
-    // grid-template-columns: 1fr 1fr 1fr;
-    // grid-template-rows: 1fr 1fr;
     justify-content: center;
-    // margin: 40px 15px 15px 40px;
   }
 }

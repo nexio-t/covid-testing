@@ -8,15 +8,15 @@ const Header = ( ) => {
   return (
     <header>
       <Container type="content">
-        <p>COVID-19 in the U.S.</p>
+        <p className="site-title">COVID-19 in the U.S.</p>
         <ul>
-          <li>
-            <Link to="/">Map</Link>
-          </li>
-          <li>
+          <li className="site-nav">
             <Link to="/page-2/">About</Link>
           </li>
-          <li>
+          <li className="site-nav">
+            <Link to="/">Map</Link>
+          </li>
+          <li className="site-nav">
             <Link to="/data-summary/">Charts</Link>
           </li>
         </ul>
