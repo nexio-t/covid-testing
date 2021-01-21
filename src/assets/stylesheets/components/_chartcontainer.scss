@@ -1,0 +1,92 @@
+.data-chart-container {
+  display: grid; 
+  grid-template-areas: 
+    'dataOne dataTwo dataThree'
+    'chartOne chartTwo chartThree';
+  justify-content: center;
+}
+
+.data-summary {
+  font-size: 2.2rem;
+  font-family: 'Saira Condensed', sans-serif;
+}
+
+.chart-one {
+ grid-area: chartOne; 
+min-height: 180px;
+  min-width: 320px;
+  margin: 10px 0px 40px 0px;}
+
+.chart-two {
+  grid-area: chartTwo; 
+min-height: 180px;
+  min-width: 320px;
+  margin: 10px 0px 40px 0px;
+}
+
+.chart-three {
+  grid-area: chartThree; 
+  min-height: 180px;
+  min-width: 320px;
+  margin: 10px 0px 40px 0px;
+}
+
+.graph-title {
+  font-size: 1.6rem;
+  font-family: 'Saira', sans-serif;
+  color: #444444; 
+
+}
+
+.data-one {
+  grid-area: dataOne; 
+}
+
+.data-two {
+  grid-area: dataTwo; 
+}
+
+.data-three {
+  grid-area: dataThree; 
+}
+
+.data-card {
+  text-align: center;
+  border: 1px solid #D3D3D3; 
+  border-radius: 20px;
+  margin: 15px 15px 45px 15px;
+  box-shadow: 2px 3px #D3D3D3;
+  min-height: 180px;
+  min-width: 320px;
+}
+
+.data-num {
+  font-size: 3rem; 
+  text-align: center; 
+  font-family: 'Saira Condensed', sans-serif;
+  margin: 0px 0px 20px 0px;
+  color: rgb(105, 18, 21)
+}
+
+.data-title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-family: 'Saira', sans-serif;
+  color: #444444; 
+}
+
+@media only screen and (max-width: 768px) {
+
+  .data-chart-container {
+    display: grid; 
+    grid-template-areas: 
+      'dataOne'
+      'dataTwo'
+      'dataThree'
+      'chartOne'
+      'chartTwo'
+      'chartThree';
+    justify-content: center;
+  }
+}

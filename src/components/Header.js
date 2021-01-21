@@ -8,13 +8,16 @@ const Header = ( ) => {
   return (
     <header>
       <Container type="content">
-        <p>U.S. COVID-19 Testing</p>
+        <p className="site-title">COVID-19 in the U.S.</p>
         <ul>
-          <li>
+          <li className="site-nav">
+            <Link to="/page-2/">About</Link>
+          </li>
+          <li className="site-nav">
             <Link to="/">Map</Link>
           </li>
-          <li>
-            <Link to="/page-2/">About</Link>
+          <li className="site-nav">
+            <Link to="/data-summary/">Charts</Link>
           </li>
         </ul>
       </Container>

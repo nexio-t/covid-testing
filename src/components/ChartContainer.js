@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Container = ({ children, className, type }) => {
+const ChartContainer = ({ children, className, type }) => {
   
-  let containerClassName = 'container';
+  let containerClassName = 'chart-container';
 
   if ( typeof type === 'string' ) {
     containerClassName = `${containerClassName} container-${type}`;
@@ -16,10 +16,10 @@ const Container = ({ children, className, type }) => {
   return <div className={containerClassName}>{ children }</div>;
 };
 
-Container.propTypes = {
+ChartContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   type: PropTypes.string,
 };
 
-export default Container;
+export default ChartContainer;

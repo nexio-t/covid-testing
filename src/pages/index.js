@@ -81,12 +81,11 @@ const IndexPage = () => {
     let response;
 
     response = await axios.get(
-      "https://covidtracking.com/api/v1/states/current.json"
+      "https://api.covidtracking.com/v1/states/current.json"
     );
 
     const { data } = response;
 
-    // Add full state name property to pass through to Google Maps API
     _.map(data, stateData => {
       _.map(fullStateNames, state => {
         if (stateData.state === state.name) {
@@ -95,13 +94,14 @@ const IndexPage = () => {
       });
     });
 
-    // Fetch coordinates for each state
-    const statesWithCoordinates = data.map(async state => {
+    const statesWithCoordinates = data.map(async (state, index) => {
       geoCodeResponse = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${state.fullState}&key=AIzaSyBGfdE4YINFg5Xg4SxRM1hgIptBzcVzZVI`
       );
 
-      state.coordinates = geoCodeResponse.data.results[0].geometry.location;
+      if (geoCodeResponse === undefined || geoCodeResponse.data.results[0] === undefined || geoCodeResponse.data.results[0].geometry.location === undefined) return; 
+
+      state.coordinates = await geoCodeResponse.data.results[0].geometry.location;
 
       return {
         type: "Feature",
@@ -116,10 +116,11 @@ const IndexPage = () => {
     });
 
     const allStates = await Promise.all(statesWithCoordinates);
+    const filteredAllStates = allStates.filter(data => data !== undefined); 
 
     let statesArr = [];
 
-    _.map(allStates, stateData => {
+    _.map(filteredAllStates, stateData => {
       statesArr.push(stateData);
     });
 
