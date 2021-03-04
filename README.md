@@ -35,5 +35,5 @@ npm start
 * [Google Fonts](https://fonts.google.com/)
 
 ### Author
-**Tomas Gear:** [Github](https://github.com/nexio-t) | [Portfolio](http://www.tomas-gear.com)
+**Tomas Gear:** [Github](https://github.com/nexio-t)
 
